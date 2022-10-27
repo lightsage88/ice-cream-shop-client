@@ -2,6 +2,10 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 
 const IceCreamShopList = (props) => {
+  const apiEndpoint =
+  process.env.REACT_APP_DEV_MODE === "false"
+    ? "https://ice-cream-shop-api.onrender.com"
+    : process.env.REACT_APP_API_URL;
   const [iceCreamShops, setIceCreamShops] = useState([]);
   useEffect(() => {
     getIceCreamData();
@@ -26,7 +30,7 @@ const IceCreamShopList = (props) => {
     const { id } = shop;
     const response = await axios({
       method: "post",
-      url: `http://${process.env.REACT_APP_API_URL}/api/yelp-review`,
+      url: `http://${apiEndpoint}/api/yelp-review`,
       data: {
         id
       }
