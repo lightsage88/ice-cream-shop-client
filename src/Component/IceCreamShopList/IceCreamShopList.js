@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const IceCreamShopList = (props) => {
   const apiEndpoint =
-  process.env.REACT_APP_DEV_MODE === "false"
+  process.env.REACT_APP_DEV_MODE == "false"
     ? "https://ice-cream-shop-api.onrender.com"
     : "http://localhost/8080";
   const [iceCreamShops, setIceCreamShops] = useState([]);
