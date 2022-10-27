@@ -5,7 +5,7 @@ const IceCreamShopList = (props) => {
   const apiEndpoint =
   process.env.REACT_APP_DEV_MODE === "false"
     ? "https://ice-cream-shop-api.onrender.com"
-    : process.env.REACT_APP_API_URL;
+    : "http://localhost/8080";
   const [iceCreamShops, setIceCreamShops] = useState([]);
   useEffect(() => {
     getIceCreamData();
@@ -14,7 +14,7 @@ const IceCreamShopList = (props) => {
     const location = props.location;
     const response = await axios({
       method: "post",
-      url: `http://${apiEndpoint}/api/yelp`,
+      url: `${apiEndpoint}/api/yelp`,
       data: {
         location,
         categories: 'icecream'
