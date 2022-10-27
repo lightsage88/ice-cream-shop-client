@@ -14,7 +14,7 @@ const IceCreamShopList = (props) => {
     const location = props.location;
     const response = await axios({
       method: "post",
-      url: `http://${process.env.REACT_APP_API_URL}/api/yelp`,
+      url: `http://${apiEndpoint}/api/yelp`,
       data: {
         location,
         categories: 'icecream'

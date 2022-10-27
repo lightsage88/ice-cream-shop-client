@@ -1,7 +1,16 @@
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
 const Input = (props) => {
+  const [inputString, setInputString] = useState("");
+  const xMove = (e) => {
+    let value;
+    if (e !== "reset") {
+      value = e.target.value;
+    } else {
+      value = "alpharetta, ga";
+    }
+    setInputString(value);
+  };
   return (
     <>
       <input
@@ -9,8 +18,12 @@ const Input = (props) => {
         label="Your City, State Abbreviation"
         variant="standard"
         placeholder="Alpharetta, GA"
-        onChange={(e) => props.updateTargetCity(e)}
+        onChange={(e) => xMove(e)}
       />
+      <button onClick={() => props.updateTargetCity(inputString)}>
+        Let's Dish!
+      </button>
+
       <button
         onClick={(e) => {
           e.preventDefault();
