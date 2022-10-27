@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.addressArea {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.reviewArea {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}

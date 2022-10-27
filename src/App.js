@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
+import AppWrapper from "./Container/AppWrapper";
+import Input from "./Component/Input";
+import IceCreamShopList from "./Component/IceCreamShopList";
+import Map from "./Component/Map";
+const App = () => {
+  console.log("process: ", process.env);
+  const [location, setLocation] = useState("alpharetta, ga");
 
-function App() {
+  const updateTargetCity = (e) => {
+    let value;
+    if (e !== "reset") {
+      value = e.target.value;
+    } else {
+      value = 'alpharetta, ga';
+    }
+    setLocation(value);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Input updateTargetCity={updateTargetCity} />
+      <IceCreamShopList location={location} />
     </div>
   );
 }
