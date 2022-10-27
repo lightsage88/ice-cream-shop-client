@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const IceCreamShopList = (props) => {
   const apiEndpoint =
-  process.env.REACT_APP_DEV_MODE === "false"
+  process.env.REACT_APP_DEV_MODE !== "false"
     ? "https://ice-cream-shop-api.onrender.com"
     : "http://localhost/8080";
   const [iceCreamShops, setIceCreamShops] = useState([]);
@@ -11,6 +11,7 @@ const IceCreamShopList = (props) => {
     getIceCreamData();
   }, [props.location])
   const getIceCreamData = async () => {
+    console.log('wtf', apiEndpoint);
     const location = props.location;
     const response = await axios({
       method: "post",
@@ -30,7 +31,7 @@ const IceCreamShopList = (props) => {
     const { id } = shop;
     const response = await axios({
       method: "post",
-      url: `http://${apiEndpoint}/api/yelp-review`,
+      url: `${apiEndpoint}/api/yelp-review`,
       data: {
         id
       }
