@@ -2,16 +2,12 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 
 const IceCreamShopList = (props) => {
-  const apiEndpoint =
-  process.env.REACT_APP_DEV_MODE == "false"
-    ? "https://ice-cream-shop-api.onrender.com"
-    : "http://localhost/8080";
+  const apiEndpoint = "https://ice-cream-shop-api.onrender.com";
   const [iceCreamShops, setIceCreamShops] = useState([]);
   useEffect(() => {
     getIceCreamData();
   }, [props.location])
   const getIceCreamData = async () => {
-    console.log('wtf', apiEndpoint);
     const location = props.location;
     const response = await axios({
       method: "post",
@@ -21,7 +17,6 @@ const IceCreamShopList = (props) => {
         categories: 'icecream'
       }
     });
-    console.log('haha', response);
     const topFiveIceCreamShops = response.data.slice(0, 5);
     const shopsWithReviews = await getReviewsForEachShop(topFiveIceCreamShops);
     setIceCreamShops(shopsWithReviews);
@@ -36,7 +31,6 @@ const IceCreamShopList = (props) => {
         id
       }
     });
-    console.log('sheet', response);
     const reviewData = {
       reviewerName: response.data.user.name,
       reviewText: response.data.text.split('.')[0]
@@ -48,17 +42,13 @@ const IceCreamShopList = (props) => {
     let array = [];
     for (let el of topShops) {
       const reviewData = await retrieveReview(el);
-      console.log('dat review Data', reviewData);
       el = {...el, reviewData} 
       array.push(el);
     }
-    console.log('array we return: ', array);
     return array;
   }
 
-  // const iceCreamQuery = getIceCreamData();
   const iceCreamShopListItems = iceCreamShops.map((el, index) => {
-    console.log('el', el);
     return (
       <li key={index}>
         <span><strong>Name: </strong>{el.name} <strong> | Review Count: </strong>{el.review_count}</span>
